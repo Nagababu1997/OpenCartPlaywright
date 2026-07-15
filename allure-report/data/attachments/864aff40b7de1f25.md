@@ -1,0 +1,117 @@
+# Instructions
+
+- Following Playwright test failed.
+- Explain why, be concise, respect Playwright best practices.
+- Provide a snippet of code with the fix, if possible.
+
+# Test info
+
+- Name: Logout.spec.ts >> User logout test @master @regression
+- Location: tests\Logout.spec.ts:46:5
+
+# Error details
+
+```
+Test timeout of 30000ms exceeded.
+```
+
+```
+Error: locator.click: Target page, context or browser has been closed
+Call log:
+  - waiting for locator('span:has-text(\'My Account\')')
+    - locator resolved to <span class="hidden-xs hidden-sm hidden-md">My Account</span>
+  - attempting click action
+    - waiting for element to be visible, enabled and stable
+    - element is visible, enabled and stable
+    - scrolling into view if needed
+    - done scrolling
+    - performing click action
+
+```
+
+# Test source
+
+```ts
+  1  | import { Page, Locator } from '@playwright/test'
+  2  | 
+  3  | export class HomePage {
+  4  | 
+  5  |     // locators
+  6  |     private readonly page: Page
+  7  |     private readonly linkMyAccount: Locator
+  8  |     private readonly linkRegister: Locator
+  9  |     private readonly linkLogin: Locator
+  10 |     private readonly textSerachBox: Locator
+  11 |     private readonly btnSearch: Locator
+  12 | 
+  13 | 
+  14 |     // constructor
+  15 | 
+  16 |     constructor(page: Page) {
+  17 | 
+  18 |         this.page = page
+  19 |         this.linkMyAccount = this.page.locator("span:has-text('My Account')")
+  20 |         this.linkRegister = this.page.locator(".dropdown-menu li a:has-text('Register')")
+  21 |         this.linkLogin = this.page.locator(".dropdown-menu li a:has-text('Login')")
+  22 |         this.textSerachBox = this.page.locator('[name="search"]')
+  23 |         this.btnSearch = this.page.locator('#search button[type="button"]')
+  24 |     }
+  25 | 
+  26 |     // actions 
+  27 |     async isHomePageExists() {
+  28 |         let title: string = await this.page.title()
+  29 |         if (title) {
+  30 |             return true
+  31 |         }
+  32 |         return false
+  33 |     }
+  34 | 
+  35 |     // click on My Account link
+  36 |     async clickMyAccount() {
+  37 |         try {
+> 38 |             await this.linkMyAccount.click()
+     |                                      ^ Error: locator.click: Target page, context or browser has been closed
+  39 |         } catch (error) {
+  40 |             console.log("Error while clicking on My Account link: " + error)
+  41 |             throw error
+  42 |         }
+  43 |     }
+  44 |     // click on Register link
+  45 |     async clickRegister() {
+  46 |         try {
+  47 |             await this.linkRegister.click()
+  48 |         } catch (error) {
+  49 |             console.log("Error while clicking on Register link: " + error)
+  50 |             throw error
+  51 |         }
+  52 |     }
+  53 |     // click on Login link
+  54 |     async clickLogin() {
+  55 |         try {
+  56 |             await this.linkLogin.click()
+  57 |         } catch (error) {
+  58 |             console.log("Error while clicking on Login link: " + error)
+  59 |             throw error
+  60 |         }
+  61 |     }
+  62 | 
+  63 |     // enter product name in search box
+  64 |     async enterProductName(productName: string) {
+  65 |         try {
+  66 |             await this.textSerachBox.fill(productName)
+  67 |         } catch (error) {
+  68 |             console.log("Error while entering product name in search box: " + error)
+  69 |             throw error
+  70 |         }
+  71 |     }
+  72 |     // click on search button
+  73 |     async clickSearchButton() {
+  74 |         try {
+  75 |             await this.btnSearch.click()
+  76 |         } catch (error) {
+  77 |             console.log("Error while clicking on search button: " + error)
+  78 |             throw error
+  79 |         }
+  80 |     }
+  81 | }
+```

@@ -1,0 +1,34 @@
+{
+  "name": "opencartplaywright",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test:master": "playwright test --grep @master --headed",
+    "test:sanity": "playwright test --grep @sanity",
+    "test:regression": "playwright test --grep @regression",
+    "test:datadriven": "playwright test --grep @datadriven --headed",
+    "test:master:headed": "playwright test --grep @master --headed",
+    "test:sanity:debug": "playwright test --grep @sanity --debug",
+    "test:endtoend": "playwright test --grep @end-to-end --headed",
+    
+    "allure:generate": "allure generate allure-results --clean",
+    "allure:open": "allure open",
+    "allure:report": "allure generate allure-results --clean && allure open",
+    "allure:serve": "allure serve allure-results"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "devDependencies": {
+    "@playwright/test": "^1.61.1",
+    "@types/node": "^26.1.0",
+    "allure-playwright": "^3.10.2"
+  },
+  "dependencies": {
+    "@faker-js/faker": "^10.5.0",
+    "csv-parse": "^7.0.1",
+    "xlsx": "^0.18.5"
+  }
+}
