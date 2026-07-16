@@ -17,7 +17,7 @@ for(const data of jsonTestData)
    test(`Login Test with JSON Data: ${data.testName} @datadriven`, async({page})=>{
 
         const config = new TestConfig(); // create instance
-        await page.goto(config.appUrl);    // getting appURL from test.config.ts file
+        await page.goto(config.appUrl);  // getting appURL from test.config.ts file
 
         const homePage = new HomePage(page);
         await homePage.clickMyAccount();
