@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test:master": "playwright test --grep @master --headed",
-    "test:sanity": "playwright test --grep @sanity",
+    "test:sanity": "playwright test --grep @sanity --headed",
     "test:regression": "playwright test --grep @regression",
     "test:datadriven": "playwright test --grep @datadriven --headed",
     "test:master:headed": "playwright test --grep @master --headed",
